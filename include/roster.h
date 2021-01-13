@@ -22,7 +22,7 @@ class roster_t {
 	public:
 
 		// methods
-		void append_employee(const employee_t& employee, const std::string& jmbg);
+		void append_employee(const std::string& jmbg, const employee_t& employee);
 		void delete_employee(const std::string& jmbg);
 		const_roster_it find_employee(const std::string& jmbg) const;
 };

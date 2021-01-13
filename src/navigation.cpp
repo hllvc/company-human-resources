@@ -1,5 +1,4 @@
 // include
-#include <cstdlib>
 #include <string>
 #include <iostream>
 
@@ -53,44 +52,18 @@ void main_menu() {
 
 // new employee function
 void create_new_employee() {
-	employee_t employee;
 
-	// name & surname input
-	bool valid_input = false;
-	while (!valid_input) {
-		try {
-			std::cout << "Enter name (only one word): ";
-			std::string * const name = string_input();
-			std::cout << "Enter surname (only one word): ";
-			std::string * const surname = string_input();
-			employee = employee_t(*name, *surname);
-			delete name;
-			delete surname;
-			valid_input = true;
-		} catch (const char * e) {
-			if (e == std::string("is digit"))
-				std::cout << "Input must not contain digit!";
-		}
-	}
+	// name, surname & JMBG input
+	std::string const * const name = string_input("Name");
+	std::string const * const surname = string_input("Surname");
+	std::string const * const jmbg = jmbg_input();
 
-	// jmbg input
-	valid_input = false;
-	while (!valid_input) {
-		try {
-			std::cout << "Enter JMBG: ";
-			std::string * const jmbg = jmbg_input();
-			roster.append_employee(*jmbg, employee);
-			delete jmbg;
-			valid_input = true;
-		} catch (const char * e) {
-			if (e == std::string("empty"))
-				std::cout << "JMBG can't be empty!";
-			else if (e == std::string("size error"))
-				std::cout << "Size of JMBG must be 13";
-			else if (e == std::string("is digit"))
-				std::cout << "JMBG can only contain digits!";
-		}
-	}
+	employee_t const employee(*name, *surname);
+	roster.append_employee(*jmbg, employee);
+
+	delete jmbg;
+	delete name;
+	delete surname;
 }
 
 // find employee function

@@ -8,6 +8,8 @@
 #include "include/roster.h"
 #include "include/navigation.h"
 
+roster_t roster;
+
 int main() {
 
 	main_menu();

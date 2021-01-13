@@ -8,7 +8,7 @@
 
 // methods definitions
 void roster_t::append_employee(const std::string& jmbg, const employee_t& employee) {
-	this->roster_[jmbg] = employee;
+	(this->roster_.find(jmbg) != this->roster_.end()) ? throw "exists" : this->roster_[jmbg] = employee;
 }
 
 void roster_t::delete_employee(const std::string& jmbg) {

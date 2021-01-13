@@ -37,10 +37,10 @@ void main_menu() {
 				create_new_employee();
 				break;
 			case SECOND_CHOICE:
-				std::cout << "second";
+				delete_employee();
 				break;
 			case THIRD_CHOICE:
-					
+					find_employee();	
 				break;
 			case EXIT_CHOICE:
 				exit(0);
@@ -59,14 +59,50 @@ void create_new_employee() {
 	std::string const * const jmbg = jmbg_input();
 
 	employee_t const employee(*name, *surname);
-	roster.append_employee(*jmbg, employee);
+	try {
+		roster.append_employee(*jmbg, employee);
+	} catch (const char * e) {
+		if (e == std::string("exists"))
+			std::cout << "Employee with given JMBG already exists";
+		delete jmbg;
+		delete name;
+		delete surname;
+		return;
+	}
 
 	delete jmbg;
 	delete name;
 	delete surname;
 }
 
+// delete employee funciton
+void delete_employee() {
+	std::string const * const jmbg = jmbg_input();
+	try {
+		roster.delete_employee(*jmbg);
+	} catch (const char * e) {
+		if (e == std::string("empty"))
+			std::cout << "There is no registered employees!\n";
+		else if (e == std::string("not found"))
+			std::cout << "Employee not found!\n";
+		delete jmbg;
+		return;
+	}
+	delete jmbg;
+}
+
 // find employee function
 void find_employee() {
-
+	std::string const * const jmbg = jmbg_input();
+	const_roster_it employee;
+	try {
+		employee = find_employee_by_jmbg(*jmbg);
+	} catch (const char * e) {
+		if (e == std::string("error")) {} {
+			delete jmbg;
+			return;
+		}
+	}
+	delete jmbg;
+	std::cout << "{" << employee->first << " : " << employee->second.getName() << " " << employee->second.getSurname() << "}";
 }

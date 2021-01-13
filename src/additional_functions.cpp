@@ -7,6 +7,8 @@
 // include custom
 #include "../include/additional_functions.h"
 
+extern roster_t roster;
+
 #define JMBG_SIZE 13
 
 // function for custom string input
@@ -76,4 +78,20 @@ void is_not_digit(std::string const * const str_ptr) {
 	if (!std::isdigit(c))
 		throw "not digit";
 		});
+}
+
+// function to find employee by JMBG
+const_roster_it find_employee_by_jmbg(const std::string& jmbg) {
+	try {
+		const_roster_it employee = roster.find_employee(jmbg);
+		return employee;
+	} catch (const char * e) {
+		if (e == std::string("empty")) {
+			std::cout << "There is no registered employees!\n";
+		}
+		else if (e == std::string("not found")) {
+			std::cout << "Employee not found!\n";
+		}
+		throw "error";
+	}
 }

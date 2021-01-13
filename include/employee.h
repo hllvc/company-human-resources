@@ -1,6 +1,6 @@
 // include guard
-#ifndef __ROSTER_H__
-#define __ROSTER_H__
+#ifndef __EMPLOYEE_H__
+#define __EMPLOYEE_H__
 
 // include
 #include <string>
@@ -15,6 +15,7 @@ class employee_t {
 	public:
 
 		// constructors
+		employee_t () {}
 		employee_t(std::string name, std::string surname) : name_(name), surname_(surname) {}
 
 		// setters
@@ -26,4 +27,4 @@ class employee_t {
 		std::string getSurname() const { return surname_; }
 };
 
-#endif // __ROSTER_H__ 
+#endif // __EMPLOYEE_H__

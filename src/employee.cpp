@@ -4,6 +4,7 @@
 // include custom
 #include "../include/employee.h"
 
+// setters definition
 void employee_t::setName(std::string name) {
 	this->name_ = name;
 }

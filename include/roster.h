@@ -9,6 +9,10 @@
 // include custom
 #include "employee.h"
 
+// custom types
+typedef std::map<std::string, employee_t>::iterator roster_it;
+typedef std::map<std::string, employee_t>::const_iterator const_roster_it;
+
 class roster_t {
 	private:
 		
@@ -20,6 +24,7 @@ class roster_t {
 		// methods
 		void append_employee(const employee_t& employee, const std::string& jmbg);
 		void delete_employee(const std::string& jmbg);
+		const_roster_it find_employee(const std::string& jmbg) const;
 };
 
 #endif // __ROSTER_H__

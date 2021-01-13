@@ -15,14 +15,13 @@ class employee_t {
 	public:
 
 		// constructors
-		employee_t () {}
 		employee_t(std::string name, std::string surname) : name_(name), surname_(surname) {}
 
 		// setters
 		void setName(std::string name);
 		void setSurname(std::string surname);
 
-		// getters
+		// getters (inline)
 		std::string getName() const { return name_; }
 		std::string getSurname() const { return surname_; }
 };

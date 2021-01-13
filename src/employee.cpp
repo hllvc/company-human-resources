@@ -12,3 +12,5 @@ void employee_t::setName(std::string name) {
 void employee_t::setSurname(std::string surname) {
 	this->surname_ = surname;
 }
+
+// setters inline in header

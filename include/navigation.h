@@ -4,5 +4,7 @@
 
 // navigation functions
 void main_menu();
+void create_new_employee();
+void find_employee();
 
 #endif // __NAVIGATION_H__

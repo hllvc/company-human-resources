@@ -5,12 +5,16 @@
 // include
 #include <string>
 
+// include custom
+#include "documents.h"
+
 class employee_t {
 	private:
 
 		// employee_t attributes
 		std::string name_;
 		std::string surname_;
+		documents_t documents_;
 
 	public:
 
@@ -25,6 +29,7 @@ class employee_t {
 		// getters (inline)
 		std::string getName() const { return name_; }
 		std::string getSurname() const { return surname_; }
+		const documents_t * const getDocuments() const { return &documents_; }
 
 		// additional methods 
 		void print_attributes() const;

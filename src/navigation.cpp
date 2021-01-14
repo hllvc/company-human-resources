@@ -40,7 +40,7 @@ void main_menu() {
 				delete_employee();
 				break;
 			case THIRD_CHOICE:
-					find_employee();	
+				find_employee();	
 				break;
 			case EXIT_CHOICE:
 				exit(0);

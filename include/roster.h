@@ -22,8 +22,6 @@ class roster_t {
 
 	public:
 
-		// getters
-
 		// methods
 		void append_employee(const std::string&, const employee_t&);
 		void delete_employee(const_roster_it);

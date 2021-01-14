@@ -16,11 +16,11 @@ class employee_t {
 
 		// constructors
 		employee_t();
-		employee_t(const std::string& name, const std::string& surname);
+		employee_t(const std::string&, const std::string&);
 
 		// setters
-		void setName(const std::string& name);
-		void setSurname(const std::string& surname);
+		void setName(const std::string&);
+		void setSurname(const std::string&);
 
 		// getters (inline)
 		std::string getName() const { return name_; }

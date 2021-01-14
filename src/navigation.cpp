@@ -65,23 +65,24 @@ void create_new_employee() {
 
 	delete jmbg;
 	delete employee;
-
 }
 
 // delete employee funciton
 void delete_employee() {
-	std::string const * const jmbg = jmbg_input(false);
-	const_roster_it employee = find_employee_by_jmbg(*jmbg);
-	delete jmbg;
-	roster.delete_employee(employee);
-	return;
+	if (!roster.empty()){
+		std::string const * const jmbg = jmbg_input(false);
+		delete_employee_by_jmbg(*jmbg);
+		delete jmbg;
+	} else
+		std::cout << "Employee list is empty!\n";
 }
 
 // find employee function
 void find_employee() {
-	std::string const * const jmbg = jmbg_input(false);
-	const_roster_it employee = find_employee_by_jmbg(*jmbg);
-	delete jmbg;
-	roster.print_employee(employee);
-	return;
+	if (!roster.empty()){
+		std::string const * const jmbg = jmbg_input(false);
+		find_employee_by_jmbg(*jmbg);
+		delete jmbg;
+	} else
+		std::cout << "Employee list is empty!\n";
 }

@@ -76,14 +76,23 @@ void is_not_digit(std::string const * const input) {
 		throw "not digit";
 		});
 }
-// function to find employee by JMBG
-const_roster_it find_employee_by_jmbg(const std::string& jmbg) {
-	const_roster_it employee;
+
+void delete_employee_by_jmbg(const std::string& jmbg) {
 	try {
-		employee = roster.find_employee(jmbg);
+		const_roster_it employee = roster.find_employee(jmbg);
+		roster.delete_employee(employee);
 	} catch (const char * e) {
-		if (e == std::string("empty"))
-			std::cout << "Employee list empty!\n";
+		if (e == std::string("not found"))
+			std::cout << "Employee with given JMBG not found!\n";
 	}
-	return employee;
+}
+
+void find_employee_by_jmbg(const std::string& jmbg) {
+	try {
+		const_roster_it employee = roster.find_employee(jmbg);
+		roster.print_employee(employee);
+	} catch (const char * e) {
+		if (e == std::string("not found"))
+			std::cout << "Employee with given JMBG not found!\n";
+	}
 }

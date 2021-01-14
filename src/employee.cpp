@@ -21,5 +21,5 @@ void employee_t::setSurname(const std::string& surname) {
 
 // additional attributes
 void employee_t::print_attributes() const {
-	std::cout << this->name_ << " " << this->surname_;
+	std::cout << getName() << " " << getSurname();
 }

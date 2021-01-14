@@ -12,14 +12,17 @@
 // custom types
 typedef std::map<std::string, employee_t>::iterator roster_it;
 typedef std::map<std::string, employee_t>::const_iterator const_roster_it;
+typedef std::map<std::string, employee_t> roster_map;
 
 class roster_t {
 	private:
 		
 		// roster_t attributes
-		std::map<std::string, employee_t> roster_;
+		roster_map roster_;
 
 	public:
+
+		// getters
 
 		// methods
 		void append_employee(const std::string&, const employee_t&);
@@ -27,6 +30,7 @@ class roster_t {
 		const_roster_it find_employee(const std::string&) const;
 		bool check_existing_jmbg(const std::string&) const;
 		void print_employee(const_roster_it) const;
+		bool empty() const;
 };
 
 #endif // __ROSTER_H__

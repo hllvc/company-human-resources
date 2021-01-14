@@ -1,5 +1,6 @@
 // include
 #include <string>
+#include <iostream>
 
 // include custom
 #include "../include/employee.h"
@@ -17,3 +18,8 @@ void employee_t::setSurname(const std::string& surname) {
 }
 
 // getters inline in header
+
+// additional attributes
+void employee_t::print_attributes() const {
+	std::cout << this->name_ << " " << this->surname_;
+}

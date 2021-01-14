@@ -25,6 +25,9 @@ class employee_t {
 		// getters (inline)
 		std::string getName() const { return name_; }
 		std::string getSurname() const { return surname_; }
+
+		// additional methods 
+		void print_attributes() const;
 };
 
 #endif // __EMPLOYEE_H__

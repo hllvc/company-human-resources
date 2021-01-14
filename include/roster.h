@@ -22,9 +22,11 @@ class roster_t {
 	public:
 
 		// methods
-		void append_employee(const std::string& jmbg, const employee_t& employee);
-		void delete_employee(const std::string& jmbg);
-		const_roster_it find_employee(const std::string& jmbg) const;
+		void append_employee(const std::string&, const employee_t&);
+		void delete_employee(const_roster_it);
+		const_roster_it find_employee(const std::string&) const;
+		bool check_existing_jmbg(const std::string&) const;
+		void print_employee(const_roster_it) const;
 };
 
 #endif // __ROSTER_H__

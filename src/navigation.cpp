@@ -52,57 +52,36 @@ void main_menu() {
 
 // new employee function
 void create_new_employee() {
-
-	// name, surname & JMBG input
 	std::string const * const name = string_input("Name");
 	std::string const * const surname = string_input("Surname");
-	std::string const * const jmbg = jmbg_input();
 
-	employee_t const employee(*name, *surname);
-	try {
-		roster.append_employee(*jmbg, employee);
-	} catch (const char * e) {
-		if (e == std::string("exists"))
-			std::cout << "Employee with given JMBG already exists";
-		delete jmbg;
-		delete name;
-		delete surname;
-		return;
-	}
-
-	delete jmbg;
+	employee_t const * const employee = new employee_t(*name, *surname);
+	
 	delete name;
 	delete surname;
+
+	std::string const * const jmbg = jmbg_input(true);
+	roster.append_employee(*jmbg, *employee);
+
+	delete jmbg;
+	delete employee;
+
 }
 
 // delete employee funciton
 void delete_employee() {
-	std::string const * const jmbg = jmbg_input();
-	try {
-		roster.delete_employee(*jmbg);
-	} catch (const char * e) {
-		if (e == std::string("empty"))
-			std::cout << "There is no registered employees!\n";
-		else if (e == std::string("not found"))
-			std::cout << "Employee not found!\n";
-		delete jmbg;
-		return;
-	}
+	std::string const * const jmbg = jmbg_input(false);
+	const_roster_it employee = find_employee_by_jmbg(*jmbg);
 	delete jmbg;
+	roster.delete_employee(employee);
+	return;
 }
 
 // find employee function
 void find_employee() {
-	std::string const * const jmbg = jmbg_input();
-	const_roster_it employee;
-	try {
-		employee = find_employee_by_jmbg(*jmbg);
-	} catch (const char * e) {
-		if (e == std::string("error")) {} {
-			delete jmbg;
-			return;
-		}
-	}
+	std::string const * const jmbg = jmbg_input(false);
+	const_roster_it employee = find_employee_by_jmbg(*jmbg);
 	delete jmbg;
-	std::cout << "{" << employee->first << " : " << employee->second.getName() << " " << employee->second.getSurname() << "}";
+	roster.print_employee(employee);
+	return;
 }

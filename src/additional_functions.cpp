@@ -13,10 +13,12 @@ extern roster_t roster;
 
 // function for custom string input
 const std::string * const string_input(const std::string& field) {
+	std::string * const input = new std::string();
 	while (true) {
+		std::cout << "Enter " << field << ": ";
+		std::cin >> *input;
 		try {
-			std::cout << "Enter " << field << ": ";
-			const std::string * const input = check_string_input();
+			is_digit(input);
 			return input;
 		} catch (const char * e) {
 			if (e == std::string("is digit"))
@@ -26,14 +28,18 @@ const std::string * const string_input(const std::string& field) {
 }
 
 // function for JMBG input
-const std::string * const jmbg_input() {
+std::string * const jmbg_input(const bool existence) {
+	std::string * const jmbg = new std::string();
 	while (true) {
+		std::cout << "Enter JMBG: ";
+		std::cin >> *jmbg;
 		try {
-			std::cout << "Enter JMBG: ";
-			const std::string * const jmbg = check_jmbg_input();
+			check_jmbg_input(*jmbg, existence);
 			return jmbg;
 		} catch (const char * e) {
-			if (e == std::string("empty"))
+			if (e == std::string("exists"))
+				std::cout << "Employee with given JMBG already exists!\n";
+			else if (e == std::string("empty"))
 				std::cout << "JMBG can't be empty!\n";
 			else if (e == std::string("size error"))
 				std::cout << "Size of JMBG must be 13!\n";
@@ -43,55 +49,41 @@ const std::string * const jmbg_input() {
 	}
 }
 
-// function for string input without digits
-const std::string * const check_string_input() {
-	std::string * const str_ptr = new std::string();
-	std::cin >> *str_ptr;
-	is_digit(str_ptr);
-	return str_ptr;
-}
-
 // function for correct JMBG format
-const std::string * const check_jmbg_input() {
-	std::string * const str_ptr = new std::string();
-	std::cin >> *str_ptr;
-	if (str_ptr->empty())
+void check_jmbg_input(const std::string& jmbg, const bool existence) {
+	if (existence && roster.check_existing_jmbg(jmbg))
+		throw "exists";
+	else if (jmbg.empty())
 		throw "empty";
-	else if (str_ptr->size() != JMBG_SIZE)
+	else if (jmbg.size() != JMBG_SIZE)
 		throw "size error";
 	else
-		is_not_digit(str_ptr);
-	return str_ptr;
+		is_not_digit(&jmbg);
 }
 
 // function for checking if string contains digits
-void is_digit(std::string const * const str_ptr) {
-	std::for_each(str_ptr->begin(), str_ptr->end(), [](const char& c){
+void is_digit(std::string const * const input) {
+	std::for_each(input->begin(), input->end(), [](const char& c){
 	if (std::isdigit(c))
 		throw "is digit";
 		});
 }
 
 // function for checking if string does not contain digits
-void is_not_digit(std::string const * const str_ptr) {
-	std::for_each(str_ptr->begin(), str_ptr->end(), [](const char& c){
+void is_not_digit(std::string const * const input) {
+	std::for_each(input->begin(), input->end(), [](const char& c){
 	if (!std::isdigit(c))
 		throw "not digit";
 		});
 }
-
 // function to find employee by JMBG
 const_roster_it find_employee_by_jmbg(const std::string& jmbg) {
+	const_roster_it employee;
 	try {
-		const_roster_it employee = roster.find_employee(jmbg);
-		return employee;
+		employee = roster.find_employee(jmbg);
 	} catch (const char * e) {
-		if (e == std::string("empty")) {
-			std::cout << "There is no registered employees!\n";
-		}
-		else if (e == std::string("not found")) {
-			std::cout << "Employee not found!\n";
-		}
-		throw "error";
+		if (e == std::string("empty"))
+			std::cout << "Employee list empty!\n";
 	}
+	return employee;
 }

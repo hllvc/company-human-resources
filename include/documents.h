@@ -10,6 +10,7 @@
 #include "document.h"
 
 // custom types
+typedef std::map<std::string, document_t>::const_iterator const_doc_it;
 typedef std::map<std::string, document_t> doc_map;
 
 class documents_t {
@@ -20,7 +21,8 @@ class documents_t {
 
 	public:
 		// methods
-		void append_document(const std::string&, const document_t&);
+		void append_document(const document_t&);
+		void list_all_documents() const;
 
 };
 

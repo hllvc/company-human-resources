@@ -7,6 +7,7 @@
 #include "../include/additional_functions.h"
 #include "../include/employee.h"
 #include "../include/roster.h"
+#include "../include/document.h"
 
 extern roster_t roster;
 
@@ -52,13 +53,20 @@ void main_menu() {
 
 // new employee function
 void create_new_employee() {
-	std::string const * const name = string_input("Name");
-	std::string const * const surname = string_input("Surname");
+	std::string const * const name = string_input("name");
+	std::string const * const surname = string_input("surname");
 
-	employee_t const * const employee = new employee_t(*name, *surname);
+	employee_t * const employee = new employee_t(*name, *surname);
 	
 	delete name;
 	delete surname;
+
+	char choice = yes_no("Do you want to add any of documents?");
+	if (choice == 'y') {
+		documents_t const * const documents = documents_input();
+		employee->setDocuments(*documents);
+		delete documents;
+	}
 
 	std::string const * const jmbg = jmbg_input(true);
 	roster.append_employee(*jmbg, *employee);

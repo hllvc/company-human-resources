@@ -31,6 +31,7 @@ bool roster_t::check_existing_jmbg(const std::string& jmbg) const {
 }
  void roster_t::print_employee(const_roster_it employee) const {
 	 employee->second.print_attributes();
+	 employee->second.print_documents();
 }
 
 bool roster_t::empty() const {

@@ -11,6 +11,43 @@ extern roster_t roster;
 
 #define JMBG_SIZE 13
 
+// function for documents input
+const documents_t  * const documents_input() {
+	documents_t * const documents = new documents_t();
+	while (true) {
+		std::string const * const doc_name = string_input("document name");
+		std::string const * const doc_type = string_input("type");
+		std::string const * const doc_description = string_input("description");
+
+		document_t const * const document = new document_t(*doc_name, *doc_type, *doc_description);
+
+		delete doc_name;
+		delete doc_type;
+		delete doc_description;
+
+		documents->append_document(*document);
+
+		delete document;
+
+		char choice = yes_no("Do you want to add another document?");
+		if (choice == 'n')
+			return documents;
+	}
+}
+
+// function for yes no
+char yes_no(const std::string& text) {
+		char choice;
+		while (true) {
+			std::cout << text <<  " (y/n): ";
+			std::cin >> choice;
+			if (choice == 'y' || choice == 'n')
+				return choice;
+			else
+				std::cout << "Wrong input!\n";
+		}
+}
+
 // function for custom string input
 const std::string * const string_input(const std::string& field) {
 	std::string * const input = new std::string();
@@ -28,7 +65,7 @@ const std::string * const string_input(const std::string& field) {
 }
 
 // function for JMBG input
-std::string * const jmbg_input(const bool existence) {
+const std::string * const jmbg_input(const bool existence) {
 	std::string * const jmbg = new std::string();
 	while (true) {
 		std::cout << "Enter JMBG: ";

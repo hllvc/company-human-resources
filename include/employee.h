@@ -14,6 +14,7 @@ class employee_t {
 		// employee_t attributes
 		std::string name_;
 		std::string surname_;
+
 		documents_t documents_;
 
 	public:
@@ -25,6 +26,7 @@ class employee_t {
 		// setters
 		void setName(const std::string&);
 		void setSurname(const std::string&);
+		void setDocuments(const documents_t&);
 
 		// getters (inline)
 		std::string getName() const { return name_; }
@@ -33,6 +35,7 @@ class employee_t {
 
 		// additional methods 
 		void print_attributes() const;
+		void print_documents() const;
 };
 
 #endif // __EMPLOYEE_H__

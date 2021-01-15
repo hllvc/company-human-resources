@@ -14,6 +14,7 @@ class document_t {
 	public:
 
 		// constructors
+		document_t();
 		document_t(const std::string&, const std::string&, const std::string&);
 
 		// setters
@@ -25,6 +26,9 @@ class document_t {
 		std::string getName() const { return this->name_; }
 		std::string getType() const { return this->type_; }
 		std::string getDescription() const { return this->description_; }
+
+		// methods
+		void print_attributes() const;
 
 };
 

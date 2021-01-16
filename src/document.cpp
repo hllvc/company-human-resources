@@ -3,6 +3,7 @@
 #include <string>
 #include <iostream>
 
+// include custom
 #include "../include/document.h"
 
 // constructors
@@ -22,12 +23,12 @@ void document_t::setDescription(const std::string& description) {
 	this->description_ = description;
 }
 
-// getter defined in headaer
+// getters defined in headaer
 
 // methods
 
-void document_t::print_attributes() const {
-	std::cout << "Document name: " << this->name_ << std::endl;
-	std::cout << "Type: " << this->type_ << std::endl;
-	std::cout << "Description: " << this->description_ << std::endl;
+void document_t::print_attributes(std::ostream& output) const {
+	output << "Document name: " << this->name_ << std::endl;
+	output << "Type: " << this->type_ << std::endl;
+	output << "Description: " << this->description_ << std::endl;
 }

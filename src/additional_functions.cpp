@@ -1,5 +1,7 @@
 // include
 #include <algorithm>
+#include <fstream>
+#include <iterator>
 #include <string>
 #include <cctype>
 #include <iostream>
@@ -36,7 +38,7 @@ const documents_t  * const documents_input() {
 }
 
 // function for yes no
-char yes_no(const std::string& text) {
+const char yes_no(const std::string& text) {
 		char choice;
 		while (true) {
 			std::cout << text <<  " (y/n): ";
@@ -127,9 +129,48 @@ void delete_employee_by_jmbg(const std::string& jmbg) {
 void find_employee_by_jmbg(const std::string& jmbg) {
 	try {
 		const_roster_it employee = roster.find_employee(jmbg);
-		roster.print_employee(employee);
+		employee->second.print_employee(std::cout);
 	} catch (const char * e) {
 		if (e == std::string("not found"))
 			std::cout << "Employee with given JMBG not found!\n";
 	}
+}
+
+// functions for loading and saving data
+
+void write_data() {
+	std::ofstream file("data.txt");
+	roster.print_all_employees(file);
+	file.close();
+}
+
+void read_data() {
+	std::ifstream file("data.txt");
+	std::string line;
+	int counter = 0;
+	employee_t employee;
+	std::string str1, str2, str3, str4, jmbg, doc_tag;
+	while (std::getline(file, line)) {
+
+	}
+}
+
+bool check_field(const std::string& input, const std::string& field) {
+	if (input == field)
+		return true;
+	return false;
+}
+
+const std::string split_input(std::string& line) {
+	bool split = false;
+	std::string res = "";
+	for (std::string::iterator it = line.begin(); it != line.end(); std::advance(it, 1)) {
+		if (*it == ' ' && !split) {
+			split = true;
+			continue;
+		}
+		if (split)
+			res += *it;
+	}
+	return res;
 }

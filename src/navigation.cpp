@@ -15,6 +15,7 @@ extern roster_t roster;
 const char FIRST_CHOICE = '1';
 const char SECOND_CHOICE = '2';
 const char THIRD_CHOICE = '3';
+const char FOURTH_CHOICE = '4';
 const char EXIT_CHOICE = '0';
 
 // navigation text
@@ -23,6 +24,7 @@ const std::string MAIN_MENU_TEXT(
 	"[" + std::string(1, FIRST_CHOICE) + "] Create new employee\n"
 	"[" + std::string(1, SECOND_CHOICE) + "] Delete existing employee\n"
 	"[" + std::string(1, THIRD_CHOICE) + "] Find existing emplyee\n"
+	"[" + std::string(1, FOURTH_CHOICE) + "] Show all emplyees\n"
 	"\n[" + std::string(1, EXIT_CHOICE) + "] Exit\n"
 	"\nYour choice: "
 );
@@ -43,10 +45,14 @@ void main_menu() {
 			case THIRD_CHOICE:
 				find_employee();	
 				break;
+			case FOURTH_CHOICE:
+				show_all_employees();
+				break;
 			case EXIT_CHOICE:
+				write_data();
 				exit(0);
 			default:
-				std::cout << "wrong";
+				std::cout << "Wrong input!" << std::endl;
 		}
 	}
 }
@@ -55,11 +61,13 @@ void main_menu() {
 void create_new_employee() {
 	std::string const * const name = string_input("name");
 	std::string const * const surname = string_input("surname");
+	std::string const * const department = string_input("department");
 
-	employee_t * const employee = new employee_t(*name, *surname);
+	employee_t * const employee = new employee_t(*name, *surname, *department);
 	
 	delete name;
 	delete surname;
+	delete department;
 
 	char choice = yes_no("Do you want to add any of documents?");
 	if (choice == 'y') {
@@ -93,4 +101,8 @@ void find_employee() {
 		delete jmbg;
 	} else
 		std::cout << "Employee list is empty!\n";
+}
+
+void show_all_employees() {
+	roster.print_all_employees(std::cout);
 }

@@ -27,7 +27,8 @@ class roster_t {
 		void delete_employee(const_roster_it);
 		const_roster_it find_employee(const std::string&) const;
 		bool check_existing_jmbg(const std::string&) const;
-		void print_employee(const_roster_it) const;
+		void print_employee(const employee_t&) const;
+		void print_all_employees(std::ostream&) const;
 		bool empty() const;
 };
 

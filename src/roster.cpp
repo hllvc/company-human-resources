@@ -1,7 +1,9 @@
 // include
+#include <iterator>
 #include <string>
 #include <map>
 #include <algorithm>
+#include <iostream>
 
 // include custom
 #include "../include/roster.h"
@@ -29,9 +31,16 @@ bool roster_t::check_existing_jmbg(const std::string& jmbg) const {
 	else 
 		return false;
 }
- void roster_t::print_employee(const_roster_it employee) const {
-	 employee->second.print_attributes();
-	 employee->second.print_documents();
+
+void roster_t::print_employee(const employee_t& employee) const {
+	employee.print_employee(std::cout);
+}
+
+void roster_t::print_all_employees(std::ostream& output) const {
+	for (const_roster_it it = this->roster_.begin(); it != this->roster_.end(); std::advance(it, 1)) {
+		output << it->first << std::endl;
+		it->second.print_employee(output);
+	}
 }
 
 bool roster_t::empty() const {

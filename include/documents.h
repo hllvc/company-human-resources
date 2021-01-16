@@ -18,11 +18,14 @@ class documents_t {
 
 		// documents_t attributes
 		doc_map documents_;
+		unsigned long doc_num_;
+
+		const int getDoc_num();
 
 	public:
 		// methods
 		void append_document(const document_t&);
-		void list_all_documents() const;
+		void list_all_documents(std::ostream&) const;
 
 };
 

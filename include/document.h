@@ -28,7 +28,7 @@ class document_t {
 		std::string getDescription() const { return this->description_; }
 
 		// methods
-		void print_attributes() const;
+		void print_attributes(std::ostream&) const;
 
 };
 

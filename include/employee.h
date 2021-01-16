@@ -14,6 +14,7 @@ class employee_t {
 		// employee_t attributes
 		std::string name_;
 		std::string surname_;
+		std::string department_;
 
 		documents_t documents_;
 
@@ -21,21 +22,22 @@ class employee_t {
 
 		// constructors
 		employee_t();
-		employee_t(const std::string&, const std::string&);
+		employee_t(const std::string&, const std::string&, const std::string&);
 
 		// setters
 		void setName(const std::string&);
 		void setSurname(const std::string&);
+		void setDepartment(const std::string&);
 		void setDocuments(const documents_t&);
 
 		// getters (inline)
 		std::string getName() const { return name_; }
 		std::string getSurname() const { return surname_; }
+		std::string getDepartment() const { return department_; }
 		const documents_t * const getDocuments() const { return &documents_; }
 
 		// additional methods 
-		void print_attributes() const;
-		void print_documents() const;
+		void print_employee(std::ostream& output) const;
 };
 
 #endif // __EMPLOYEE_H__

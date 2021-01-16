@@ -22,7 +22,13 @@ void is_digit(std::string const * const);
 void is_not_digit(std::string const * const);
 void delete_employee_by_jmbg(const std::string&);
 void find_employee_by_jmbg(const std::string&);
-char yes_no(const std::string& text);
+const char yes_no(const std::string& text);
+
+// data functions
+void write_data();
+void read_data();
+const std::string split_input(const std::string&, const std::string&);
+bool check_field(std::string&);
 
 // templates
 

@@ -4,6 +4,7 @@
 
 // include
 #include <string>
+#include <vector>
 
 // include custom
 #include "employee.h"
@@ -27,7 +28,7 @@ const char yes_no(const std::string& text);
 // data functions
 void write_data();
 void read_data();
-const std::string split_input(const std::string&, const std::string&);
+std::vector<std::string> split_input(std::string& line);
 bool check_field(std::string&);
 
 // templates

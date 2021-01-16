@@ -28,7 +28,7 @@ void document_t::setDescription(const std::string& description) {
 // methods
 
 void document_t::print_attributes(std::ostream& output) const {
-	output << "Document name: " << this->name_ << std::endl;
+	output << "Document: " << this->name_ << std::endl;
 	output << "Type: " << this->type_ << std::endl;
 	output << "Description: " << this->description_ << std::endl;
 }

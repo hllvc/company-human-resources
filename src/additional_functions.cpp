@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <fstream>
 #include <iterator>
+#include <list>
 #include <string>
 #include <cctype>
 #include <iostream>
@@ -108,6 +109,13 @@ void is_digit(std::string const * const input) {
 		});
 }
 
+bool is_digit(const std::string& input) {
+	for (std::string::const_iterator it = input.begin(); it != input.end(); std::advance(it, 1))
+		if (std::isdigit(*it))
+			return true;
+	return false;
+}
+
 // function for checking if string does not contain digits
 void is_not_digit(std::string const * const input) {
 	std::for_each(input->begin(), input->end(), [](const char& c){
@@ -147,30 +155,47 @@ void write_data() {
 void read_data() {
 	std::ifstream file("data.txt");
 	std::string line;
-	int counter = 0;
+	std::string jmbg;
 	employee_t employee;
-	std::string str1, str2, str3, str4, jmbg, doc_tag;
+	document_t document;
+	documents_t documents;
+	std::vector<std::string> list;
 	while (std::getline(file, line)) {
-
+		list = split_input(line);
+		if (list.at(0) == "JMBG:")
+			jmbg = list.at(1);
+		else if (list.at(0) == "Name:")
+			employee.setName(list.at(1));
+		else if (list.at(0) == "Surname:")
+			employee.setSurname(list.at(1));
+		else if (list.at(0) == "Department:")
+			employee.setDepartment(list.at(1));
+		else if (list.at(0) == "Document:")
+			document.setName(list.at(1));
+		else if (list.at(0) == "Type:")
+			document.setType(list.at(1));
+		else if (list.at(0) == "Description:") {
+			document.setDescription(list.at(1));
+			documents.append_document(document);
+		} else if (line == "") {
+			employee.setDocuments(documents);
+			documents.clear_all_documents();
+			roster.append_employee(jmbg, employee);
+		}
 	}
 }
 
-bool check_field(const std::string& input, const std::string& field) {
-	if (input == field)
-		return true;
-	return false;
-}
-
-const std::string split_input(std::string& line) {
-	bool split = false;
-	std::string res = "";
-	for (std::string::iterator it = line.begin(); it != line.end(); std::advance(it, 1)) {
-		if (*it == ' ' && !split) {
-			split = true;
+std::vector<std::string> split_input(std::string& line) {
+	std::vector<std::string> split_list;
+	std::string str = "";
+	for (std::string::iterator it = line.begin(); it != line.end(); std::advance(it, 1)){
+		if (*it == ' ') {
+			split_list.push_back(str);
+			str = "";
 			continue;
 		}
-		if (split)
-			res += *it;
+		str += *it;
 	}
-	return res;
+	split_list.push_back(str);
+	return split_list;
 }

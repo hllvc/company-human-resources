@@ -1,4 +1,5 @@
 // include
+#include <ostream>
 #include <string>
 #include <iostream>
 
@@ -20,7 +21,7 @@ const char EXIT_CHOICE = '0';
 
 // navigation text
 const std::string MAIN_MENU_TEXT(
-	"MAIN MENU\n"
+	"\nMAIN MENU\n\n"
 	"[" + std::string(1, FIRST_CHOICE) + "] Create new employee\n"
 	"[" + std::string(1, SECOND_CHOICE) + "] Delete existing employee\n"
 	"[" + std::string(1, THIRD_CHOICE) + "] Find existing emplyee\n"
@@ -29,12 +30,18 @@ const std::string MAIN_MENU_TEXT(
 	"\nYour choice: "
 );
 
+const int LENGTH = 20;
+const char SIGN = '_';
+const std::string LINE(LENGTH, SIGN);
+
 // main menu function
 void main_menu() {
 	char choice;
 	while(true) {
+		std::cout << LINE << std::endl;
 		std::cout << MAIN_MENU_TEXT;
 		std::cin >> choice;
+		std::cout << LINE << std::endl;
 		switch (choice) {
 			case FIRST_CHOICE:
 				create_new_employee();
@@ -69,6 +76,7 @@ void create_new_employee() {
 	delete surname;
 	delete department;
 
+	std::cout << std::endl;
 	char choice = yes_no("Do you want to add any of documents?");
 	if (choice == 'y') {
 		documents_t const * const documents = documents_input();
@@ -76,6 +84,7 @@ void create_new_employee() {
 		delete documents;
 	}
 
+	std::cout << std::endl;
 	std::string const * const jmbg = jmbg_input(true);
 	roster.append_employee(*jmbg, *employee);
 
@@ -104,5 +113,8 @@ void find_employee() {
 }
 
 void show_all_employees() {
-	roster.print_all_employees(std::cout);
+	if (!roster.empty()){
+		roster.print_all_employees(std::cout);
+	} else
+		std::cout << "Employee list is empty!\n";
 }

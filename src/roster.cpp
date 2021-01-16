@@ -1,5 +1,6 @@
 // include
 #include <iterator>
+#include <ostream>
 #include <string>
 #include <map>
 #include <algorithm>
@@ -38,8 +39,9 @@ void roster_t::print_employee(const employee_t& employee) const {
 
 void roster_t::print_all_employees(std::ostream& output) const {
 	for (const_roster_it it = this->roster_.begin(); it != this->roster_.end(); std::advance(it, 1)) {
-		output << it->first << std::endl;
+		output << "JMBG: " << it->first << std::endl;
 		it->second.print_employee(output);
+		output << std::endl;
 	}
 }
 

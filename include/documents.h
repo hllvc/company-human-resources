@@ -26,6 +26,7 @@ class documents_t {
 		// methods
 		void append_document(const document_t&);
 		void list_all_documents(std::ostream&) const;
+		void clear_all_documents();
 
 };
 

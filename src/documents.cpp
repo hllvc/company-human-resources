@@ -23,3 +23,7 @@ const int documents_t::getDoc_num() {
 	this->doc_num_++;
 	return this->doc_num_-1;
 }
+
+void documents_t::clear_all_documents() {
+	this->documents_.clear();
+}

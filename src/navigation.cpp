@@ -17,25 +17,41 @@ const char FIRST_CHOICE = '1';
 const char SECOND_CHOICE = '2';
 const char THIRD_CHOICE = '3';
 const char FOURTH_CHOICE = '4';
+<<<<<<< HEAD
 const char FIFTH_CHOICE = '5';
+=======
+>>>>>>> origin/main
 const char EXIT_CHOICE = '0';
 
 // navigation text
 const std::string MAIN_MENU_TEXT(
+<<<<<<< HEAD
 	"MAIN MENU\n\n"
+=======
+	"\nMAIN MENU\n\n"
+>>>>>>> origin/main
 	"[" + std::string(1, FIRST_CHOICE) + "] Create new employee\n"
 	"[" + std::string(1, SECOND_CHOICE) + "] Delete existing employee\n"
 	"[" + std::string(1, THIRD_CHOICE) + "] Find existing emplyee\n"
 	"[" + std::string(1, FOURTH_CHOICE) + "] Show all emplyees\n"
+<<<<<<< HEAD
 	"[" + std::string(1, FIFTH_CHOICE) + "] Change Employee info\n"
+=======
+>>>>>>> origin/main
 	"\n[" + std::string(1, EXIT_CHOICE) + "] Exit\n"
 	"\nYour choice: "
 );
 
 const int LENGTH = 20;
+<<<<<<< HEAD
 const char SIGN = '-';
 const std::string LINE(LENGTH, SIGN); 
  
+=======
+const char SIGN = '_';
+const std::string LINE(LENGTH, SIGN);
+
+>>>>>>> origin/main
 // main menu function
 void main_menu() {
 	char choice;
@@ -57,9 +73,12 @@ void main_menu() {
 			case FOURTH_CHOICE:
 				show_all_employees();
 				break;
+<<<<<<< HEAD
 			case FIFTH_CHOICE:
 				update_employee();
 				break;
+=======
+>>>>>>> origin/main
 			case EXIT_CHOICE:
 				write_data();
 				exit(0);
@@ -103,10 +122,15 @@ void delete_employee() {
 		std::string const * const jmbg = jmbg_input(false);
 		delete_employee_by_jmbg(*jmbg);
 		delete jmbg;
+<<<<<<< HEAD
 	} else {
 		std::cout << LINE << std::endl;
 		std::cout << "Employee list is empty!\n";
 	}
+=======
+	} else
+		std::cout << "Employee list is empty!\n";
+>>>>>>> origin/main
 }
 
 // find employee function
@@ -114,17 +138,24 @@ void find_employee() {
 	if (!roster.empty()){
 		std::string const * const jmbg = jmbg_input(false);
 		find_employee_by_jmbg(*jmbg);
+<<<<<<< HEAD
 		std::cout << std::endl;
 		delete jmbg;
 	} else {
 		std::cout << LINE << std::endl;
 		std::cout << "Employee list is empty!\n";
 	}
+=======
+		delete jmbg;
+	} else
+		std::cout << "Employee list is empty!\n";
+>>>>>>> origin/main
 }
 
 void show_all_employees() {
 	if (!roster.empty()){
 		roster.print_all_employees(std::cout);
+<<<<<<< HEAD
 	} else {
 		std::cout << LINE << std::endl;
 		std::cout << "Employee list is empty!\n";
@@ -142,3 +173,8 @@ void update_employee() {
 		std::cout << "Employee list is empty!\n";
 	}
 }
+=======
+	} else
+		std::cout << "Employee list is empty!\n";
+}
+>>>>>>> origin/main

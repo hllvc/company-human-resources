@@ -38,10 +38,10 @@ const std::string LINE(LENGTH, SIGN);
 void main_menu() {
 	char choice;
 	while(true) {
-		std::cout << LINE << std::endl;
+		std::cout << LINE << "\n\n";
 		std::cout << MAIN_MENU_TEXT;
 		std::cin >> choice;
-		std::cout << LINE << std::endl;
+		std::cout << LINE << "\n\n";
 		switch (choice) {
 			case FIRST_CHOICE:
 				create_new_employee();

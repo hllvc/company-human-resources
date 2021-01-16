@@ -6,12 +6,9 @@
 // include custom
 #include "../include/documents.h"
 
-<<<<<<< HEAD
 const int LENGTH = 10;
 const char SIGN = '_';
 const std::string LINE(LENGTH, SIGN);
-=======
->>>>>>> origin/main
 
 // methods definitions
 void documents_t::append_document(const document_t& document) {
@@ -20,11 +17,7 @@ void documents_t::append_document(const document_t& document) {
 
 void documents_t::list_all_documents(std::ostream& output) const {
 	for (const_doc_it it = this->documents_.begin(); it != this->documents_.end(); std::advance(it, 1)) {
-<<<<<<< HEAD
 		output << LINE << std::endl;
-=======
-		output << it->first << std::endl;
->>>>>>> origin/main
 		it->second.print_attributes(output);
 	}
 }

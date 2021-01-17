@@ -8,5 +8,6 @@ void create_new_employee();
 void delete_employee();
 void find_employee();
 void show_all_employees();
+void update_employee();
 
 #endif // __NAVIGATION_H__

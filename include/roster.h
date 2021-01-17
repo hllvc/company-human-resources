@@ -25,7 +25,7 @@ class roster_t {
 		// methods
 		void append_employee(const std::string&, const employee_t&);
 		void delete_employee(const_roster_it);
-		const_roster_it find_employee(const std::string&) const;
+		roster_it find_employee(const std::string&);
 		bool check_existing_jmbg(const std::string&) const;
 		void print_employee(const employee_t&) const;
 		void print_all_employees(std::ostream&) const;

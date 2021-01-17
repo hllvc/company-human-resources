@@ -43,7 +43,7 @@ const documents_t  * const documents_input() {
 const char yes_no(const std::string& text) {
 		char choice;
 		while (true) {
-			std::cout << text <<  " (y/n): ";
+			std::cout << std::endl << text <<  " (y/n): ";
 			std::cin >> choice;
 			if (choice == 'y' || choice == 'n')
 				return choice;
@@ -78,6 +78,7 @@ const std::string * const jmbg_input(const bool existence) {
 			check_jmbg_input(*jmbg, existence);
 			return jmbg;
 		} catch (const char * e) {
+			std::cout << std::endl;
 			if (e == std::string("exists"))
 				std::cout << "Employee with given JMBG already exists!\n";
 			else if (e == std::string("empty"))
@@ -143,6 +144,36 @@ void find_employee_by_jmbg(const std::string& jmbg) {
 		if (e == std::string("not found"))
 			std::cout << "Employee with given JMBG not found!\n";
 	}
+}
+
+void update_employee_by_jmbg(const std::string& jmbg) {
+	try {
+		roster_it employee = roster.find_employee(jmbg);
+		if (change_field("name")) {
+			std::string const * const name = string_input("name");
+			employee->second.setName(*name);
+			delete name;
+		}
+		if (change_field("surname")) {
+			std::string const * const surname = string_input("surname");
+			employee->second.setSurname(*surname);
+			delete surname;
+		}
+		if (change_field("department")) {
+			std::string const * const department = string_input("department");
+			employee->second.setDepartment(*department);
+			delete department;
+		}
+	} catch (const char * e) {
+		if (e == std::string("not found"))
+		std::cout << "Employee with given JMBG not found!\n";
+	}
+}
+
+bool change_field(const std::string& field) {
+	if (yes_no("Change " + field + "?") == 'y')
+		return true;
+	return false;
 }
 
 // functions for loading and saving data

@@ -18,8 +18,8 @@ void roster_t::delete_employee(const_roster_it employee) {
 	employee = this->roster_.erase(employee);
 }
 
-const_roster_it roster_t::find_employee(const std::string& jmbg) const {
-	const_roster_it employee = this->roster_.find(jmbg);
+roster_it roster_t::find_employee(const std::string& jmbg) {
+	roster_it employee = this->roster_.find(jmbg);
 	if (employee != this->roster_.end())
 		return employee;
 	else
@@ -40,6 +40,7 @@ void roster_t::print_employee(const employee_t& employee) const {
 
 void roster_t::print_all_employees(std::ostream& output) const {
 	for (const_roster_it it = this->roster_.begin(); it != this->roster_.end(); std::advance(it, 1)) {
+		output << std::string (5, '#') << std::endl;
 		output << "JMBG: " << it->first << std::endl;
 		it->second.print_employee(output);
 		output << std::endl;

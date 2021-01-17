@@ -17,23 +17,25 @@ const char FIRST_CHOICE = '1';
 const char SECOND_CHOICE = '2';
 const char THIRD_CHOICE = '3';
 const char FOURTH_CHOICE = '4';
+const char FIFTH_CHOICE = '5';
 const char EXIT_CHOICE = '0';
 
 // navigation text
 const std::string MAIN_MENU_TEXT(
-	"\nMAIN MENU\n\n"
+	"MAIN MENU\n\n"
 	"[" + std::string(1, FIRST_CHOICE) + "] Create new employee\n"
 	"[" + std::string(1, SECOND_CHOICE) + "] Delete existing employee\n"
 	"[" + std::string(1, THIRD_CHOICE) + "] Find existing emplyee\n"
 	"[" + std::string(1, FOURTH_CHOICE) + "] Show all emplyees\n"
+	"[" + std::string(1, FIFTH_CHOICE) + "] Change Employee info\n"
 	"\n[" + std::string(1, EXIT_CHOICE) + "] Exit\n"
 	"\nYour choice: "
 );
 
 const int LENGTH = 20;
-const char SIGN = '_';
-const std::string LINE(LENGTH, SIGN);
-
+const char SIGN = '-';
+const std::string LINE(LENGTH, SIGN); 
+ 
 // main menu function
 void main_menu() {
 	char choice;
@@ -54,6 +56,9 @@ void main_menu() {
 				break;
 			case FOURTH_CHOICE:
 				show_all_employees();
+				break;
+			case FIFTH_CHOICE:
+				update_employee();
 				break;
 			case EXIT_CHOICE:
 				write_data();
@@ -98,8 +103,10 @@ void delete_employee() {
 		std::string const * const jmbg = jmbg_input(false);
 		delete_employee_by_jmbg(*jmbg);
 		delete jmbg;
-	} else
+	} else {
+		std::cout << LINE << std::endl;
 		std::cout << "Employee list is empty!\n";
+	}
 }
 
 // find employee function
@@ -107,14 +114,31 @@ void find_employee() {
 	if (!roster.empty()){
 		std::string const * const jmbg = jmbg_input(false);
 		find_employee_by_jmbg(*jmbg);
+		std::cout << std::endl;
 		delete jmbg;
-	} else
+	} else {
+		std::cout << LINE << std::endl;
 		std::cout << "Employee list is empty!\n";
+	}
 }
 
 void show_all_employees() {
 	if (!roster.empty()){
 		roster.print_all_employees(std::cout);
-	} else
+	} else {
+		std::cout << LINE << std::endl;
 		std::cout << "Employee list is empty!\n";
+	}
+}
+
+
+void update_employee() {
+	if (!roster.empty()) {
+		std::string const * const jmbg = jmbg_input(false);
+		update_employee_by_jmbg(*jmbg);
+		delete jmbg;
+	} else {
+		std::cout << LINE << std::endl;
+		std::cout << "Employee list is empty!\n";
+	}
 }

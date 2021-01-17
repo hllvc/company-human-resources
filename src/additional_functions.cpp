@@ -1,5 +1,6 @@
 // include
 #include <algorithm>
+#include <cstdlib>
 #include <fstream>
 #include <iterator>
 #include <list>
@@ -145,15 +146,32 @@ void find_employee_by_jmbg(const std::string& jmbg) {
 }
 
 // functions for loading and saving data
+const std::string * const get_path() {
+	std::string * const path = new std::string();
+	char * userpath = std::getenv("USERPROFILE");
+	if (userpath != nullptr)
+			*path = std::string(userpath) + "\\Documents\\data.txt";
+	else
+		userpath = std::getenv("HOME");
+	if (userpath != nullptr)
+		*path = std::string(userpath) + "/Documents/data";
+	else
+		*path = "data.txt";
+	return path;
+}
 
 void write_data() {
-	std::ofstream file("data.txt");
+	std::string const * const path = get_path();
+	std::ofstream file(*path);
+	delete path;
 	roster.print_all_employees(file);
 	file.close();
 }
 
 void read_data() {
-	std::ifstream file("data.txt");
+	std::string const * const path = get_path();
+	std::ifstream file(*path);
+	delete path;
 	std::string line;
 	std::string jmbg;
 	employee_t employee;
